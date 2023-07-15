@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./style.css">
+    <script href="./script.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+</head>
+<body>
+    <div class="main_container">
+    <h1 style="text-align: center;color: #000">View Details</h1>
+
+    <section class="dropdown_container">
+        <div style="display: flex;justify-content: center;gap: 10px;">
+            <label for="employee" style="align-self: center;font-size: 20px;font-weight: 600;">Select a user:</label>
+            <select id="selectDrop" style="font-size: 18px;font-weight: 500;border: 1px solid #000;">
+                <option value=""></option>
+            </select>
+
+            <button onclick="GetSelectedItem('selectDrop')">Get Details</button>
+        </div>
+        <table class="table_wrap" style="margin-top: 50px;" id="tableHere"></table>
+    </section>
+    <button id="goBack">Back to Add New User's</button>
+</div>
+</body>
+
+<script>
+document.getElementById("goBack").onclick = function () {
+    location.href = "./index.html";
+};
+
+let apiData = new Array();
+function getApiCall() {
+    fetch('https://script.google.com/macros/s/AKfycbyQCRzh6tpaejgEMemCHCWiFSjtRiMrFkdZ_48mu92wzyLuOC3lTNIJIUHb2n830MBb/exec')
+    .then(res => res.json())
+    .then(data => {
+        apiData = data.content // 1. saving responce to an array on Global Decleration
+        console.log(apiData,'apiData');
+
+        let empDetails = data.content.slice(1).map(sublist => ({ fname: sublist[0] })); // 2. here we made value for dropdown list
+        console.log(empDetails,'empDetails');
+        for (let key in empDetails) {
+        let option = document.createElement("option");
+        option.setAttribute('value', empDetails[key].fname);
+        let optionText = document.createTextNode(empDetails[key].fname);
+        option.appendChild(optionText);
+        selectDrop.appendChild(option);
+        }
+    });
+}
+getApiCall();
+
+function GetSelectedItem(el) {
+    document.getElementById("tableHere").innerHTML = '';
+    var e = document.getElementById(el);
+    let stationName = e.options[e.selectedIndex].value
+    let name = e.options[e.selectedIndex].text
+    const matchedArray = apiData.filter(sublist => sublist.includes(name));
+    const resultArray = [apiData[0]].concat(matchedArray);
+
+    let tr = resultArray.reduce((prev, cur) => {
+    let td = cur.map(e => `<td>${e}</td>`)
+    return prev + `<tr>${td.join("")}</tr>`
+    }, "\r")
+    document.getElementById("tableHere").innerHTML =tr;
+}
+</script>
+</html>

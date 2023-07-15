@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Project</title>
+</head>
+<body>
+    <div class="main_container">
+    <h1 style="text-align: center;color: #000;">Add User's</h1>
+
+    <section class="input_container">
+        <form id="form">
+            <div class="input_wrap">
+                <label for="name">Name:</label>
+                <input type="text" id="fname" name="fname"><br><br>
+            </div>
+            <div class="input_wrap">
+                <label for="station">Station:</label>
+                <input type="text" id="station" name="station"><br><br>
+            </div>
+            <div class="input_wrap">
+                <label for="sec">Section:</label>
+                <input type="text" id="sec" name="sec"><br><br>
+            </div>
+            <div class="input_wrap">
+                <label for="gear">Gear:</label>
+                <input type="text" id="gear" name="gear"><br><br>
+            </div>
+            <div class="input_wrap">
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id"><br><br>
+            </div>
+
+            <div style="display: flex;">
+                <button type="submit">Submit & Refresh</button>
+            </div>
+        </form>
+    </section>
+    <button id="goNext">Goto View User</button>
+    </div>
+</body>
+<script>
+let form = document.getElementById("form");
+let form1 = document.getElementById("form");
+
+function checkProperties(obj) {
+    for (var key in obj) {
+        if (obj[key] !== null && obj[key] != "")
+            return true;
+    }
+    return false;
+}
+
+form.addEventListener("submit", (e) => {
+e.preventDefault();
+const formInfo = new FormData(form);
+// const formInfoObj = Object.fromEntries(formInfo.entries());
+
+    fetch('https://script.google.com/macros/s/AKfycbyQCRzh6tpaejgEMemCHCWiFSjtRiMrFkdZ_48mu92wzyLuOC3lTNIJIUHb2n830MBb/exec',
+    {
+        method: 'POST',
+        body: formInfo,
+    })
+    .then(res => {
+        if(res.status==200) {
+            alert('User Added Successfully')
+            console.log(res,'data')
+        }
+    })
+    .catch(err=> alert(err))
+    this.form.reset();
+});
+
+document.getElementById("goNext").onclick = function () {
+    location.href = "./page2.html";
+};
+</script>
+</html>
