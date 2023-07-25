@@ -34,7 +34,7 @@ document.getElementById("goBack").onclick = function () {
 
 let apiData = new Array();
 function getApiCall() {
-    fetch('https://script.google.com/macros/s/AKfycbyQCRzh6tpaejgEMemCHCWiFSjtRiMrFkdZ_48mu92wzyLuOC3lTNIJIUHb2n830MBb/exec')
+    fetch('https://script.google.com/macros/s/AKfycbxyNn0LCYl7dlr0JpoMFuLiQALAqJhEGeXx-3YFBTyHm3-lay-MQE1d590yVjWJi7KCGw/exec')
     .then(res => res.json())
     .then(data => {
         apiData = data.content // 1. saving responce to an array on Global Decleration
