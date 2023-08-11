@@ -48,13 +48,26 @@ tr td {
     height: 300px;
     margin: 0 auto;
 }
+.dropdown_container button {
+    height: 30px;
+    padding: 5px 20px !important;
+}
+#selectDrop {
+    width: 150px;
+}
+#selectSection {
+    width: 168px;
+    height: 24px;
+}
 .input_wrap {
     display: flex;
+    height: 30px;
 }
 .input_wrap label {
     width: 120px;
 }
-.input_wrap input {
+.input_wrap input,
+.input_wrap select {
     height: 20px;
     border: 1px solid #000;
 }
@@ -75,4 +88,54 @@ form {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+/* form popup */
+/* The popup form - hidden by default */
+.form-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+    transform: translate(-50%, -50%);
+    background: #232323;
+    -webkit-box-shadow: 0px 0px 0px 9999px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 0px 9999px rgba(0, 0, 0, 0.5);
+}
+/* Add styles to the form container */
+.form-container {
+    min-width: 300px;
+    max-width: 600px;
+    padding: 10px;
+    background-color: white;
+}
+  
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+    padding: 15px;
+    border: none;
+    background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+}
+.form-container .cancel {
+    background-color: red;
 }

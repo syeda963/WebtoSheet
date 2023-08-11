@@ -14,24 +14,36 @@
     <section class="input_container">
         <form id="form">
             <div class="input_wrap">
-                <label for="name">Name:</label>
-                <input type="text" id="fname" name="fname"><br><br>
+                <label for="employee">Section:</label>
+                <select type="select" id="selectSection" name="section" for="employee" form="form">
+                    <option value="">Select</option>
+                    <option value="Mysore">Mysore</option>
+                    <option value="Hassan">Hassan</option>
+                    <option value="Holenarsipur">Holenarsipur</option>
+                    <option value="Kabakaputtur">Kabakaputtur</option>
+                    <option value="Arsikere">Arsikere</option>
+                    <option value="Birur">Birur</option>
+                    <option value="Shivamogga">Shivamogga</option>
+                    <option value="Chikjajur">Chikjajur</option>
+                    <option value="Chitradurga">Chitradurga</option>
+                    <option value="Harihar">Harihar</option>
+                </select>
             </div>
             <div class="input_wrap">
-                <label for="station">Station:</label>
-                <input type="text" id="station" name="station"><br><br>
+                <label for="staffName">Staff Name:</label>
+                <input type="text" id="staffName" name="staffname" required><br><br>
             </div>
             <div class="input_wrap">
-                <label for="sec">Section:</label>
-                <input type="text" id="sec" name="sec"><br><br>
+                <label for="CUG">CUG:</label>
+                <input type="text" id="CUG" name="cug" required><br><br>
             </div>
             <div class="input_wrap">
-                <label for="gear">Gear:</label>
-                <input type="text" id="gear" name="gear"><br><br>
+                <label for="Other">Other:</label>
+                <input type="text" id="Other" name="other" required><br><br>
             </div>
             <div class="input_wrap">
-                <label for="id">ID:</label>
-                <input type="text" id="id" name="id"><br><br>
+                <label for="movement">Movement:</label>
+                <input type="text" id="movement" name="movement" required><br><br>
             </div>
 
             <div style="display: flex;">
@@ -39,12 +51,28 @@
             </div>
         </form>
     </section>
-    <button id="goNext">Goto View User</button>
+    <button id="goNext">Login and View User Details</button>
+
+    <div class="form-popup" id="formPopup">
+        <form class="form-container" id="popupFormValue">
+          <h2>Login</h2>
+      
+          <input type="text" placeholder="Enter Email" id="email" name="email" required>
+      
+          <input type="password" placeholder="Enter Password" id="psw" name="psw" required>
+            
+          <div style="display: flex; gap: 24px">
+            <button type="submit" class="btn">Login</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          </div>
+        </form>
+    </div>
     </div>
 </body>
+
 <script>
 let form = document.getElementById("form");
-let form1 = document.getElementById("form");
+let popupFormValue = document.getElementById("popupFormValue");
 
 function checkProperties(obj) {
     for (var key in obj) {
@@ -56,26 +84,51 @@ function checkProperties(obj) {
 
 form.addEventListener("submit", (e) => {
 e.preventDefault();
-const formInfo = new FormData(form);
-// const formInfoObj = Object.fromEntries(formInfo.entries());
 
-    fetch('https://script.google.com/macros/s/AKfycbxyNn0LCYl7dlr0JpoMFuLiQALAqJhEGeXx-3YFBTyHm3-lay-MQE1d590yVjWJi7KCGw/exec',
-    {
-        method: 'POST',
-        body: formInfo,
-    })
-    .then(res => {
-        if(res.status==200) {
-            alert('User Added Successfully')
-            console.log(res,'data')
-        }
-    })
-    .catch(err=> alert(err))
-    this.form.reset();
+const formInfo = new FormData(form);
+const formValue = JSON.stringify(form)
+const formInfoObj = Object.fromEntries(formInfo.entries());
+
+    if(formInfoObj?.section !== '') {
+        console.log(formInfo,'formInfo');
+        fetch('https://script.google.com/macros/s/AKfycbxIREJly62LSvK0B4gNL-wRkQVpkxWYCHS5EVn_RsK1ayYp4YQGyzlRxbGd09k0cFJvjw/exec',
+        {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formInfo,
+        })
+        .then(res => {
+            if(res.status==302 || res.status==200) {
+                alert('User Added Successfully')
+                console.log(res,'data')
+            }
+        })
+        .catch(err=> alert(err))
+        this.form.reset();
+    } else {
+        alert('please provide section')
+    }
 });
 
+function closeForm() {
+    document.getElementById("formPopup").style.display = "none"
+}
+
+popupFormValue.addEventListener("submit", (e) => {
+e.preventDefault();
+    const formInfo = new FormData(popupFormValue);
+    const formInfoObj = Object.fromEntries(formInfo.entries());
+    console.log(formInfoObj,'eeeee');
+
+    if(formInfoObj.email === "swrRailway@Email.com" && formInfoObj.psw == "PersonalRailway")
+        location.href = "./page2.html";
+
+    else
+        alert('Please provide valid email id and password')
+})
+
 document.getElementById("goNext").onclick = function () {
-    location.href = "./page2.html";
+    document.getElementById("formPopup").style.display = "block";
 };
 </script>
 </html>

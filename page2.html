@@ -24,6 +24,7 @@
         <table class="table_wrap" style="margin-top: 50px;" id="tableHere"></table>
     </section>
     <button id="goBack">Back to Add New User's</button>
+    <button><a href="https://docs.google.com/spreadsheets/d/1dzMGhQiRsSYE58CsoRV0X8FH8w6SX9llFYPFZw0ngL4/edit?pli=1#gid=63281749" target="_black" style="color: #fff">View Sheet</a></button>
 </div>
 </body>
 
@@ -34,21 +35,21 @@ document.getElementById("goBack").onclick = function () {
 
 let apiData = new Array();
 function getApiCall() {
-    fetch('https://script.google.com/macros/s/AKfycbxyNn0LCYl7dlr0JpoMFuLiQALAqJhEGeXx-3YFBTyHm3-lay-MQE1d590yVjWJi7KCGw/exec')
+    fetch('https://script.google.com/macros/s/AKfycbxIREJly62LSvK0B4gNL-wRkQVpkxWYCHS5EVn_RsK1ayYp4YQGyzlRxbGd09k0cFJvjw/exec')
     .then(res => res.json())
     .then(data => {
         apiData = data.content // 1. saving responce to an array on Global Decleration
         console.log(apiData,'apiData');
 
-        let empDetails = data.content.slice(1).map(sublist => ({ fname: sublist[0] })); // 2. here we made value for dropdown list
-        console.log(empDetails,'empDetails');
-        for (let key in empDetails) {
-        let option = document.createElement("option");
-        option.setAttribute('value', empDetails[key].fname);
-        let optionText = document.createTextNode(empDetails[key].fname);
-        option.appendChild(optionText);
-        selectDrop.appendChild(option);
-        }
+        // let empDetails = data.content.slice(1).map(sublist => ({ fname: sublist[0] })); // 2. here we made value for dropdown list
+        // console.log(empDetails,'empDetails');
+        // for (let key in empDetails) {
+        // let option = document.createElement("option");
+        // option.setAttribute('value', empDetails[key].fname);
+        // let optionText = document.createTextNode(empDetails[key].fname);
+        // option.appendChild(optionText);
+        // selectDrop.appendChild(option);
+        // }
     });
 }
 getApiCall();
