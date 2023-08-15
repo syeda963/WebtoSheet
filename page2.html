@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="./style.css">
     <script href="./script.js"></script>
@@ -8,65 +9,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project</title>
 </head>
+
 <body>
     <div class="main_container">
-    <h1 style="text-align: center;color: #000">View Details</h1>
+        <h1 style="text-align: center;color: #000">View Details</h1>
 
-    <section class="dropdown_container">
-        <div style="display: flex;justify-content: center;gap: 10px;">
-            <label for="employee" style="align-self: center;font-size: 20px;font-weight: 600;">Select a user:</label>
-            <select id="selectDrop" style="font-size: 18px;font-weight: 500;border: 1px solid #000;">
-                <option value=""></option>
-            </select>
+        <section class="dropdown_container">
+            <div style="display: flex;justify-content: center;gap: 10px;">
+                <label for="employee" style="align-self: center;font-size: 20px;font-weight: 600;">Select a
+                    user:</label>
+                <select id="selectDrop" style="font-size: 18px;font-weight: 500;border: 1px solid #000;">
+                    <option value=""></option>
+                </select>
 
-            <button onclick="GetSelectedItem('selectDrop')">Get Details</button>
-        </div>
-        <table class="table_wrap" style="margin-top: 50px;" id="tableHere"></table>
-    </section>
-    <button id="goBack">Back to Add New User's</button>
-    <button><a href="https://docs.google.com/spreadsheets/d/1dzMGhQiRsSYE58CsoRV0X8FH8w6SX9llFYPFZw0ngL4/edit?pli=1#gid=63281749" target="_black" style="color: #fff">View Sheet</a></button>
-</div>
+                <button onclick="GetSelectedItem('selectDrop')">Get Details</button>
+            </div>
+            <table class="table_wrap" style="margin-top: 50px;" id="tableHere"></table>
+        </section>
+        <button id="goBack">Back to Add New User's</button>
+        <button><a
+                href="https://docs.google.com/spreadsheets/d/1dzMGhQiRsSYE58CsoRV0X8FH8w6SX9llFYPFZw0ngL4/edit?pli=1#gid=63281749"
+                target="_black" style="color: #fff">View Sheet</a></button>
+    </div>
 </body>
 
 <script>
-document.getElementById("goBack").onclick = function () {
-    location.href = "./index.html";
-};
+    document.getElementById("goBack").onclick = function () {
+        location.href = "./index.html";
+    };
 
-let apiData = new Array();
-function getApiCall() {
-    fetch('https://script.google.com/macros/s/AKfycbysxGOYRjQQKXeG2hrXk0DTmWNsQtjV6t67KGE6jQPIilf0rT1U9I15a8_HZ4SKRNPG/exec')
-    .then(res => res.json())
-    .then(data => {
-        apiData = data.content // 1. saving responce to an array on Global Decleration
-        console.log(apiData,'apiData');
+    let apiData = new Array();
+    function getApiCall() {
+        fetch('https://script.google.com/macros/s/AKfycbzQaME82Cs_Su-B_BXvkko42Vw8NBs4yBC1f_OopFmjRtUIpo2afLmamWMSQHFzWKhoWA/exec')
+            .then(res => res.json())
+            .then(data => {
+                apiData = data.content // 1. saving responce to an array on Global Decleration
+                let empDetails = Object.keys(data.content); // 2. here we made value for dropdown list
 
-        // let empDetails = data.content.slice(1).map(sublist => ({ fname: sublist[0] })); // 2. here we made value for dropdown list
-        // console.log(empDetails,'empDetails');
-        // for (let key in empDetails) {
-        // let option = document.createElement("option");
-        // option.setAttribute('value', empDetails[key].fname);
-        // let optionText = document.createTextNode(empDetails[key].fname);
-        // option.appendChild(optionText);
-        // selectDrop.appendChild(option);
-        // }
-    });
-}
-getApiCall();
+                for (let key in empDetails) {
+                    let option = document.createElement("option");
+                    option.setAttribute('value', empDetails[key]);
+                    let optionText = document.createTextNode(empDetails[key]);
+                    option.appendChild(optionText);
+                    selectDrop.appendChild(option);
+                }
+            });
+    }
+    getApiCall();
 
-function GetSelectedItem(el) {
-    document.getElementById("tableHere").innerHTML = '';
-    var e = document.getElementById(el);
-    let stationName = e.options[e.selectedIndex].value
-    let name = e.options[e.selectedIndex].text
-    const matchedArray = apiData.filter(sublist => sublist.includes(name));
-    const resultArray = [apiData[0]].concat(matchedArray);
+    function GetSelectedItem(el) {
+        document.getElementById("tableHere").innerHTML = '';
+        var e = document.getElementById(el);
+        let stationName = e.options[e.selectedIndex].value
+        let filterList = apiData[stationName]
+        let name = e.options[e.selectedIndex].text
 
-    let tr = resultArray.reduce((prev, cur) => {
-    let td = cur.map(e => `<td>${e}</td>`)
-    return prev + `<tr>${td.join("")}</tr>`
-    }, "\r")
-    document.getElementById("tableHere").innerHTML =tr;
-}
+        let todayDate = new Date().toDateString();
+        function convertTZ(date) {
+            return new Date((date).toLocaleString("en-US", { timeZone: 'Asia/Kolkata' }));
+        }
+
+        const matchedArray = filterList.filter(sublist => sublist.includes(name));
+
+        // to slice date value from all arrays
+        const modifiedArray = matchedArray.map(subArray => {
+            let myDate = convertTZ(subArray[0])
+            if (todayDate == myDate.toDateString()) {
+                return subArray.slice(1)
+            } else {
+                return subArray = []
+            }
+            return
+        });
+
+        // to slice date from header
+        const modifiedfilterList = filterList[0].slice(1);
+        const resultArray = [modifiedfilterList].concat(modifiedArray);
+
+        // creating a table
+        let tr = resultArray.reduce((prev, cur) => {
+            let td = cur.map(e => `<td>${e}</td>`)
+            return prev + `<tr>${td.join("")}</tr>`
+        }, "\r")
+        document.getElementById("tableHere").innerHTML = tr;
+    }
 </script>
+
 </html>
