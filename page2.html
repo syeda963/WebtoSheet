@@ -11,7 +11,22 @@
 </head>
 
 <body>
-    <div class="main_container">
+    <div class="form-popup" id="formPopup">
+        <form class="form-container" id="popupFormValue">
+            <h2>Login</h2>
+
+            <input type="text" placeholder="Enter Email" id="email" name="email" required>
+
+            <input type="password" placeholder="Enter Password" id="psw" name="psw" required>
+
+            <div style="display: flex; gap: 24px">
+                <button type="submit" class="btn">Login</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Back</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="main_container" id="mainContainer">
         <h1 style="text-align: center;color: #000">View Details</h1>
 
         <section class="dropdown_container">
@@ -34,6 +49,9 @@
 </body>
 
 <script>
+    let popupFormValue = document.getElementById("popupFormValue");
+    let mainContainer = document.getElementById("mainContainer");
+
     document.getElementById("goBack").onclick = function () {
         location.href = "./index.html";
     };
@@ -93,6 +111,24 @@
         }, "\r")
         document.getElementById("tableHere").innerHTML = tr;
     }
+
+    function closeForm() {
+        location.href = "./index.html";
+    }
+
+    popupFormValue.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formInfo = new FormData(popupFormValue);
+        const formInfoObj = Object.fromEntries(formInfo.entries());
+        console.log(formInfoObj, 'formInfoObj');
+
+        if (formInfoObj.email === "swrRailway@Email.com" && formInfoObj.psw == "PersonalRailway") {
+            document.getElementById("mainContainer").style.display = "flex"
+            document.getElementById("formPopup").style.display = "none"
+        } else {
+            alert('Please provide valid email id and password')
+        }
+    })
 </script>
 
 </html>
