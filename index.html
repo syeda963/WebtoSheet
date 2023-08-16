@@ -49,32 +49,16 @@
                 </div>
 
                 <div style="display: flex;">
-                    <button type="submit">Submit & Refresh</button>
+                    <button type="submit">Submit & Reset</button>
                 </div>
             </form>
         </section>
         <button id="goNext">Login and View User Details</button>
-
-        <div class="form-popup" id="formPopup">
-            <form class="form-container" id="popupFormValue">
-                <h2>Login</h2>
-
-                <input type="text" placeholder="Enter Email" id="email" name="email" required>
-
-                <input type="password" placeholder="Enter Password" id="psw" name="psw" required>
-
-                <div style="display: flex; gap: 24px">
-                    <button type="submit" class="btn">Login</button>
-                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                </div>
-            </form>
-        </div>
     </div>
 </body>
 
 <script>
     let form = document.getElementById("form");
-    let popupFormValue = document.getElementById("popupFormValue");
 
     function checkProperties(obj) {
         for (var key in obj) {
@@ -110,24 +94,8 @@
         }
     });
 
-    function closeForm() {
-        document.getElementById("formPopup").style.display = "none"
-    }
-
-    popupFormValue.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const formInfo = new FormData(popupFormValue);
-        const formInfoObj = Object.fromEntries(formInfo.entries());
-
-        if (formInfoObj.email === "swrRailway@Email.com" && formInfoObj.psw == "PersonalRailway")
-            location.href = "./page2.html";
-
-        else
-            alert('Please provide valid email id and password')
-    })
-
     document.getElementById("goNext").onclick = function () {
-        document.getElementById("formPopup").style.display = "block";
+        location.href = "./page2.html"
     };
 </script>
 
