@@ -22,6 +22,7 @@ tr td {
     padding: 5px 10px;
 }
 .main_container {
+    display: none;
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 2px 25px rgba(0,0,0,.2);
@@ -56,7 +57,7 @@ tr td {
     width: 150px;
 }
 #selectSection {
-    width: 168px;
+    width: 175px;
     height: 24px;
 }
 .input_wrap {
@@ -93,7 +94,7 @@ form {
 /* form popup */
 /* The popup form - hidden by default */
 .form-popup {
-    display: none;
+    display: block;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -101,8 +102,8 @@ form {
     z-index: 9;
     transform: translate(-50%, -50%);
     background: #232323;
-    -webkit-box-shadow: 0px 0px 0px 9999px rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 0px 0px 9999px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0px 0px 0px 9999px #e35869;
+    box-shadow: 0px 0px 0px 9999px #e35869;
 }
 /* Add styles to the form container */
 .form-container {
