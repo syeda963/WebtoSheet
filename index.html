@@ -11,52 +11,26 @@
 
 <body>
     <div class="main_container">
-        <h1 style="text-align: center;color: #000;">Add User's</h1>
+        <!-- <h1 style="text-align: center;color: #000;">Main</h1> -->
 
-        <section class="input_container">
+        <section class="input_container" style="margin-top: 50px;">
             <form id="form">
                 <div class="input_wrap">
-                    <label for="employee">Section:</label>
-                    <select type="select" id="selectSection" name="section" for="employee" form="form">
+                    <label for="employee">Work:</label>
+                    <select type="select" id="selectSection" name="value" for="employee" form="form">
                         <option value="">Select</option>
-                        <option value="Mysore">Mysore</option>
-                        <option value="Hassan">Hassan</option>
-                        <option value="Holenarsipur">Holenarsipur</option>
-                        <option value="Kabakaputtur">Kabakaputtur</option>
-                        <option value="Arsikere">Arsikere</option>
-                        <option value="Birur">Birur</option>
-                        <option value="Shivamogga">Shivamogga</option>
-                        <option value="Chikjajur">Chikjajur</option>
-                        <option value="Chitradurga">Chitradurga</option>
-                        <option value="Harihar">Harihar</option>
+                        <option value="Movement">Movement</option>
+                        <option value="Disconnection">Disconnection</option>
+                        <option value="Reconnection">Reconnection</option>
                     </select>
                 </div>
-                <div class="input_wrap">
-                    <label for="staffName">Staff Name:</label>
-                    <input type="text" id="staffName" name="staffname" required><br><br>
-                </div>
-                <div class="input_wrap">
-                    <label for="CUG">CUG:</label>
-                    <input type="text" id="CUG" name="cug"><br><br>
-                </div>
-                <div class="input_wrap">
-                    <label for="Other">Other:</label>
-                    <input type="text" id="Other" name="other"><br><br>
-                </div>
-                <div class="input_wrap">
-                    <label for="movement">Movement:</label>
-                    <input type="text" id="movement" name="movement" required><br><br>
-                </div>
+
 
                 <div style="display: flex;">
-                    <button type="submit">Submit & Reset</button>
+                    <button type="submit">Submit</button>
                 </div>
             </form>
         </section>
-<!--         <button id="goNext">Login and View User Details</button> -->
-        <button><a
-                href="https://docs.google.com/spreadsheets/d/1dzMGhQiRsSYE58CsoRV0X8FH8w6SX9llFYPFZw0ngL4/edit?pli=1#gid=63281749"
-                target="_black" style="color: #fff">View Sheet</a></button>
     </div>
 </body>
 
@@ -75,31 +49,25 @@
         e.preventDefault();
 
         const formInfo = new FormData(form);
-        const formValue = JSON.stringify(form)
         const formInfoObj = Object.fromEntries(formInfo.entries());
+        console.log(formInfoObj, 'formInfoObj');
+        switch (formInfoObj.value) {
+            case 'Movement':
+                location.href = "./AddUser.html"
+                break;
 
-        if (formInfoObj?.section !== '') {
-            fetch('https://script.google.com/macros/s/AKfycbzQaME82Cs_Su-B_BXvkko42Vw8NBs4yBC1f_OopFmjRtUIpo2afLmamWMSQHFzWKhoWA/exec',
-                {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    body: formInfo,
-                })
-                .then(res => {
-                    if (res.status == 302 || res.status == 200) {
-                        alert('User Added Successfully')
-                    }
-                })
-                .catch(err => alert(err))
-            this.form.reset();
-        } else {
-            alert('please provide section')
+            case 'Disconnection':
+                location.href = "./AddDisconnect.html"
+                break;
+
+            case 'Reconnection':
+                location.reload(true)
+                break;
+
+            default:
+                break;
         }
     });
-
-    document.getElementById("goNext").onclick = function () {
-        location.href = "./page2.html"
-    };
 </script>
 
 </html>
