@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Project</title>
+</head>
+
+<body>
+    <div class="main_container main_container_addDisconnection">
+        <h1 style="text-align: center;color: #000;">Add User's</h1>
+
+        <section class="input_container">
+            <form id="form">
+                <div class="input_wrap">
+                    <label for="employee">Section:</label>
+                    <select onchange="GetSelectedItem('selectDrop')" type="select" id="selectSection" name="section"
+                        for="employee" form="form">
+                        <option value="">Select</option>
+                        <option value="Mysore">Mysore</option>
+                        <option value="Hassan">Hassan</option>
+                        <option value="Arsikere">Arsikere</option>
+                        <option value="Kadur">Kadur</option>
+                        <option value="Birur">Birur</option>
+                        <option value="Chikjajur">Chikjajur</option>
+                        <option value="Amaravthicolony">Amaravthicolony</option>
+                    </select>
+                </div>
+
+                <div class="input_wrap">
+                    <label for="station">Station:</label>
+                    <select id="selectStation" style="font-size: 18px;font-weight: 500;border: 1px solid #000;"
+                        name="station" form="form">
+                        <option value=""></option>
+                    </select>
+                </div>
+
+                <div class="input_wrap">
+                    <label for="staffName">Staff Name:</label>
+                    <input type="text" id="staffName" name="staffname" required><br><br>
+                </div>
+                <div class="input_wrap">
+                    <label for="TOD">Time of Disconnection:</label>
+                    <input type="text" id="TOD" name="timeofdisconnection" required><br><br>
+                </div>
+                <div class="input_wrap">
+                    <label for="ENN">Equipment Name No:</label>
+                    <input type="text" id="ENN" name="equipmentnameno" required><br><br>
+                </div>
+                <div class="input_wrap">
+                    <label for="ROD">Reason of Disconnection:</label>
+                    <textarea id="ROD" name="reasonofdisconnection"></textarea><br><br>
+                </div>
+
+                <div class="input_wrap">
+                    <label for="RT">Reconnection Time:</label>
+                    <input type="text" id="RT" name="reconnectiontime"><br><br>
+                </div>
+                <div class="input_wrap">
+                    <label for="GR">General Remarks:</label>
+                    <textarea id="GR" name="generalremarks"></textarea><br><br>
+                </div>
+
+                <div style="display: flex;">
+                    <button type="submit">Submit & Reset</button>
+                </div>
+            </form>
+        </section>
+        <button id="goBack">Back</button>
+    </div>
+</body>
+
+<script>
+    let form = document.getElementById("form");
+
+    const stationList = [
+        {
+            "Mysore": "Mysore",
+            "Ashokapuram": "Ashokapuram",
+            "Kadakola": "Kadakola",
+            "NanjangudTown": "NanjangudTown",
+            "Chamarajanagar": "Chamarajanagar",
+            "Naganahalli": "Naganahalli",
+            "Shrirangapattana": "Shrirangapattana",
+            "Pandavapura": "Pandavapura",
+            "Byadarahalli": "Byadarahalli",
+            "Mngt": "Mngt",
+            "Belagola": "Belagola",
+            "Sagarakatte": "Sagarakatte",
+            "Krishnarajanagar": "Krishnarajanagar",
+            "HosaAgrahara": "HosaAgrahara",
+            "Akkihebbalu": "Akkihebbalu",
+            "Mandagere": "Mandagere",
+            "Holenarasipur": "Holenarasipur",
+            "Mavinkere": "Mavinkere"
+        },
+        {
+            "Hassan": "Hassan",
+            "Koravangala": "Koravangala",
+            "Bageshpura": "Bageshpura",
+            "Habbanghatta": "Habbanghatta",
+            "Alur": "Alur",
+            "Ballupet": "Ballupet",
+            "Saklespur": "Saklespur",
+            "Donigal": "Donigal",
+            "Kadagaravalli": "Kadagaravalli",
+            "Yedakumari": "Yedakumari",
+            "Shirivagilu": "Shirivagilu",
+            "Subramanyaroad": "Subramanyaroad",
+            "Yedamangala": "Yedamangala",
+            "Narimogaru": "Narimogaru",
+            "Kabakaputtur": "Kabakaputtur",
+            "Neralakatte": "Neralakatte",
+            "Bantavala": "Bantavala"
+        },
+        {
+            "Koravangala": "Koravangala",
+            "Bageshpura": "Bageshpura",
+            "Habanghatta": "Habanghatta",
+            "Arsikere": "Arsikere",
+            "Adihalli": "Adihalli",
+            "Honnavalli": "Honnavalli",
+            "Tiptur": "Tiptur",
+            "Kardi": "Kardi",
+            "Banasandra": "Banasandra",
+            "Ammasandra": "Ammasandra",
+            "Arsikere": "Arsikere",
+            "Banavara": "Banavara",
+            "Devanur": "Devanur",
+            "Ballekere": "Ballekere",
+            "Kadur": "Kadur",
+            "Birur": "Birur"
+        },
+        {
+            "Kadur": "Kadur",
+            "Sakharapatna": "Sakharapatna",
+            "Chickmangalore": "Chickmangalore"
+        },
+        {
+            "Birur": "Birur",
+            "Sivapura": "Sivapura",
+            "Tarikere": "Tarikere",
+            "Masarahalli": "Masarahalli",
+            "Bhadravathi": "Bhadravathi",
+            "Shimogatown": "Shimogatown",
+            "Kumsi": "Kumsi",
+            "Anadapuram": "Anadapuram",
+            "Sagarajambugaru": "Sagarajambugaru",
+            "Talaguppa": "Talaguppa",
+            "Nagavangala": "Nagavangala",
+            "Ajjampura": "Ajjampura",
+            "Shivani": "Shivani",
+            "Hosadurgaroad": "Hosadurgaroad",
+            "Ramgiri": "Ramgiri",
+            "Holalkere": "Holalkere",
+            "Chikjajur": "Chikjajur"
+        },
+        {
+            "Chikjajur": "Chikjajur",
+            "Bbh": "Bbh",
+            "Amritapura": "Amritapura",
+            "Haliyuru": "Haliyuru",
+            "Chitradurga": "Chitradurga",
+            "Balenahalli": "Balenahalli",
+            "Challakere": "Challakere",
+            "Thalaku": "Thalaku",
+            "Bommanagundanakere": "Bommanagundanakere",
+            "Molakalmuru": "Molakalmuru",
+            "Sasalu": "Sasalu",
+            "Mayakonda": "Mayakonda",
+            "Kodaganur": "Kodaganur",
+            "Tolahunse": "Tolahunse",
+            "Davangere": "Davangere"
+        },
+        {
+            "Amaravthicolony": "Amaravthicolony",
+            "Harihar": "Harihar",
+            "Kumarapattanam": "Kumarapattanam",
+            "Chalgeri": "Chalgeri",
+            "Ranibennur": "Ranibennur",
+            "Devagudda": "Devagudda",
+            "Byadgi": "Byadgi",
+            "Haveri": "Haveri",
+            "Telgi": "Telgi",
+            "Harapanahalli": "Harapanahalli",
+            "Bennihalli": "Bennihalli",
+        }
+    ]
+
+    function GetSelectedItem(el) {
+        var e = document.getElementById('selectSection');
+        var stationDropdown = document.getElementById('selectStation');
+        let stationName = e.options[e.selectedIndex].value
+
+        let array = [
+            { name: "Mysore", value: 0 },
+            { name: "Hassan", value: 1 },
+            { name: "Arsikere", value: 2 },
+            { name: "Kadur", value: 3 },
+            { name: "Birur", value: 4 },
+            { name: "Chikjajur", value: 5 },
+            { name: "Amaravthicolony", value: 6 },
+        ]
+
+        // Find the station object that matches the given stationName
+        let selectedStation = ''
+        array.map((val) => {
+            if (stationName === val.name) {
+                return selectedStation = stationList[val.value]
+            }
+        });
+
+        // Clear previous options
+        stationDropdown.innerHTML = '';
+
+        // Get the keys (station names) from the selected station object
+        let stationKeys = Object.keys(selectedStation);
+
+        // // Create the HTML select dropdown
+        for (let stationKey of stationKeys) {
+            let option = document.createElement("option");
+            option.setAttribute('value', stationKey);
+            let optionText = document.createTextNode(stationKey);
+            option.appendChild(optionText);
+            stationDropdown.appendChild(option);
+        }
+    }
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const formInfo = new FormData(form);
+        const formValue = JSON.stringify(form)
+        const formInfoObj = Object.fromEntries(formInfo.entries());
+        console.log(formInfoObj);
+
+        if (formInfoObj?.section !== '') {
+            fetch('https://script.google.com/macros/s/AKfycbzsUoZGKuGi5drTRHipQH35IbYeGevRq1703jvTbe7Yb5IlswrRfjHS_LSsdtUMv0ta/exec',
+                {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: formInfo,
+                })
+                .then(res => {
+                    console.log(res,'res');
+                    if (res.status == 301 || res.status == 200) {
+                        alert('Disconnect Added Successfully')
+                    } else {
+                        alert('Disconnect Added Successfully !!!')
+                    }
+                })
+                .catch(err => alert(err))
+            this.form.reset();
+        } else {
+            alert('please provide section')
+        }
+    });
+
+    document.getElementById("goBack").onclick = function () {
+        location.href = "./index.html"
+    };
+</script>
+
+</html>
