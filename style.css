@@ -21,6 +21,16 @@ tr td {
     border: 1px solid;
     padding: 5px 10px;
 }
+.main_container_addDisconnection {
+    min-width: 600px;
+}
+.main_container_addDisconnection label {
+    white-space: nowrap;
+}
+.main_container_addDisconnection .input_wrap label {
+    width: 180px;
+}
+
 .main_container {
     display: none;
     background-color: #fff;
@@ -56,7 +66,8 @@ tr td {
 #selectDrop {
     width: 150px;
 }
-#selectSection {
+#selectSection,
+#selectStation {
     width: 175px;
     height: 24px;
 }
