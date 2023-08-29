@@ -67,16 +67,16 @@ tr td {
     width: 150px;
 }
 #selectSection,
-#selectStation,
-input,
-textarea {
+#selectStation {
     width: 175px;
     max-height: 24px;
     padding: 0;
 }
-#selectSection,
-#selectStation {
-    height: 24px;
+input,
+textarea {
+    max-height: 24px;
+    width: 173px;
+    padding: 0;
 }
 textarea {
 }
@@ -87,10 +87,14 @@ textarea {
 .input_wrap label {
     width: 120px;
 }
-.input_wrap input,
-.input_wrap select {
-    height: 20px;
+.input_wrap input {
+    height: 24px !important;
     border: 1px solid #000;
+}
+.input_wrap select {
+    height: 26px !important;
+    border: 1px solid #000;
+    max-height: 26px !important;
 }
 .submit_btn a {
     margin-top: 50px;
