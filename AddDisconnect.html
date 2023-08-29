@@ -259,9 +259,9 @@
                     // Clear section dropdown
                     var stationDropdown = document.getElementById('selectStation');
                     stationDropdown.innerHTML = '';
+                    this.form.reset();
                 })
                 .catch(err => alert(err))
-            this.form.reset();
         } else {
             alert('please provide section')
         }
