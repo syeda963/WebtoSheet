@@ -255,6 +255,10 @@
                     } else {
                         alert('Disconnect Added Successfully !!!')
                     }
+
+                    // Clear section dropdown
+                    var stationDropdown = document.getElementById('selectStation');
+                    stationDropdown.innerHTML = '';
                 })
                 .catch(err => alert(err))
             this.form.reset();
