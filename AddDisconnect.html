@@ -54,15 +54,14 @@
                     <label for="ROD">Reason of Disconnect:</label>
                     <textarea id="ROD" name="reasonofdisconnection"></textarea><br><br>
                 </div>
-
-                <div class="input_wrap">
+                <!-- <div class="input_wrap">
                     <label for="RT">Reconnection Time:</label>
                     <input type="text" id="RT" name="reconnectiontime"><br><br>
                 </div>
                 <div class="input_wrap">
                     <label for="GR">General Remarks:</label>
                     <textarea id="GR" name="generalremarks"></textarea><br><br>
-                </div>
+                </div> -->
 
                 <div style="display: flex;">
                     <button type="submit">Submit & Reset</button>
@@ -242,19 +241,16 @@
         console.log(formInfoObj);
 
         if (formInfoObj?.section !== '') {
-            fetch('https://script.google.com/macros/s/AKfycbyCn7OfLa_Khm9AgnHIHe6VYDQOmL_G97gdm5c4LWeFiPzb8zb3Pg5i1nRQMqNuXM4U/exec',
+            fetch('https://script.google.com/macros/s/AKfycbyRV-tJdf7ddUxeQ8wOxpIvYFiAxgL5kGKhwRVTDgiMOZ7KbJtOFtRg0A3j-1_HUMQn/exec',
                 {
                     method: 'POST',
                     mode: 'no-cors',
                     body: formInfo,
                 })
                 .then(res => {
-                    console.log(res,'res');
-                    if (res.status == 301 || res.status == 200) {
-                        alert('Disconnect Added Successfully')
-                    } else {
-                        alert('Disconnect Added Successfully !!!')
-                    }
+                    res.text().then((r) => {
+                        	alert(r.message || 'Success!!');
+						});
 
                     // Clear section dropdown
                     var stationDropdown = document.getElementById('selectStation');

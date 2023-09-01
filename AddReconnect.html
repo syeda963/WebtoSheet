@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./style.css" />
+		<title>Project</title>
+	</head>
+
+	<body>
+		<div class="main_container main_container_addDisconnection">
+			<h1 style="text-align: center; color: #000">Disconnection Summary</h1>
+
+			<section class="input_container">
+				<form id="form">
+					<div class="input_wrap">
+						<label for="employee">Section:</label>
+						<select
+							type="select"
+							id="selectSection"
+							name="section"
+							for="employee"
+							form="form"
+						>
+							<option value="">Select</option>
+							<option value="Mysore">Mysore</option>
+							<option value="Hassan">Hassan</option>
+							<option value="Arsikere">Arsikere</option>
+							<option value="Kadur">Kadur</option>
+							<option value="Birur">Birur</option>
+							<option value="Chikjajur">Chikjajur</option>
+							<option value="Amaravthicolony">Amaravthicolony</option>
+						</select>
+					</div>
+
+					<table id="tblData" class="table_wrap">
+						<thead>
+							<tr>
+								<th>Sl No</th>
+								<th>Date</th>
+								<th>Station</th>
+								<th>Staff Name</th>
+								<th>Time of Disconnect</th>
+								<th>Equipment Name No</th>
+								<th>Reason of disconnect</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="no-data" colspan="8">No Data</td>
+							</tr>
+						</tbody>
+					</table>
+                    <div class="input_wrap">
+						<label for="RT">Reconnection Time:</label>
+						<input type="text" id="RT" name="reconnectiontime" /><br /><br />
+					</div>
+					<div class="input_wrap">
+						<label for="GR">General Remarks:</label>
+						<textarea id="GR" name="generalremarks"></textarea><br /><br />
+					</div>
+
+					<div style="display: flex">
+						<button type="submit">Submit & Reset</button>
+					</div>
+				</form>
+			</section>
+			<button id="goBack">Back</button>
+
+			<button>
+				<a
+					href="https://docs.google.com/spreadsheets/d/1DnYDbXNuVvtu7-WjTR2F9GLO8T_37OW6NLhy8ktpEbQ/edit#gid=0"
+					target="_black"
+					style="color: #fff"
+					>View Sheet</a
+				>
+			</button>
+		</div>
+	</body>
+
+	<script>
+		const url =
+			'https://script.google.com/macros/s/AKfycbyRV-tJdf7ddUxeQ8wOxpIvYFiAxgL5kGKhwRVTDgiMOZ7KbJtOFtRg0A3j-1_HUMQn/exec';
+		let form = document.getElementById('form');
+		function initTable(showEmpty = true) {
+			var tBody = document
+				.getElementById('tblData')
+				.getElementsByTagName('tbody')[0];
+			tBody.innerHTML = '';
+			if (showEmpty) {
+				var newRow = tBody.insertRow();
+				newRow.innerHTML =
+					'<tr><td class="no-data" colspan="8">No Data</td></tr>';
+			}
+			return tBody;
+		}
+		document.getElementById('selectSection').addEventListener('change', (e) => {
+			const loc_url = url + '?location=' + e.target.value;
+			fetch(loc_url, {
+				method: 'GET',
+				redirect: 'follow',
+			})
+				.then((response) => response.text())
+				.then((data) => {
+					const result = JSON.parse(data);
+					var tBody = initTable(result.length === 0);
+                    if(result.length === 0){
+                        alert("No records.")
+                    }
+					for (let i = 0; i < result.length; i++) {
+						const element = result[i];
+						var html = `<tr>
+		                          <td>${i + 1}</td>
+		                          <td>${element.date}</td>
+		                          <td>${element.station}</td>
+		                          <td>${element.staffname}</td>
+		                          <td>${element.timeofdisconnection}</td>
+		                          <td>${element.equipmentnameno}</td>
+		                          <td>${element.reasonofdisconnection}</td>
+		                          <td><input type="radio" name="rowIndex" value="${
+																element.rowIndex
+															}"></td>
+		                          </tr>`;
+						var newRow = tBody.insertRow(tBody.rows.length);
+						newRow.innerHTML = html;
+					}
+				});
+		});
+
+		form.addEventListener('submit', (e) => {
+			e.preventDefault();
+
+			const formInfo = new FormData(form);
+			const formValue = JSON.stringify(form);
+			const formInfoObj = Object.fromEntries(formInfo.entries());
+			console.log(formInfoObj);
+			if (!formInfoObj?.section) {
+				alert('please provide section');
+			} else if (!formInfoObj?.rowIndex) {
+				alert('please select a row');
+			} else if (!formInfoObj?.reconnectiontime) {
+				alert('please enter reconnection time');
+			} else if (!formInfoObj?.generalremarks) {
+				alert('please enter remarks');
+			} else {
+				fetch(url, {
+					method: 'POST',
+					mode: 'no-cors',
+					body: formInfo,
+				})
+					.then((res) => {
+						res.text().then((r) => {
+                            alert(r.message || 'Success!!');
+						});
+						this.form.reset();
+						initTable();
+					})
+					.catch((err) => alert(err));
+			}
+		});
+
+		document.getElementById('goBack').onclick = function () {
+			location.href = './index.html';
+		};
+	</script>
+</html>
