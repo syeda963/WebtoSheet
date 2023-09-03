@@ -48,9 +48,17 @@ tr th,tr td {
     transform: translate(-50%,-50%);
     min-width: 500px;
 }
+.input_wrap {
+    padding-bottom: 5px;
+}
 @media screen and (max-width: 600px) {
     .main_container {
         min-width: 360px;
+    }
+    .table_wrap {
+        display: block;
+        width: 350px;
+        overflow: scroll;
     }
 }
 .input_container {
