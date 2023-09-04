@@ -4,10 +4,11 @@ html {
 }
 body {
     /* background: #e35869; */
-    background-image: url("./img//maxresdefault.jpg");
-    background-repeat: no-repeat;
+    background: url(./img//maxresdefault.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-    background-position: 0 -50px;
 }
 button {
     background: #2d3b55;
