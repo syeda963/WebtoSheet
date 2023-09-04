@@ -3,7 +3,11 @@ html {
     font-size: 13px;
 }
 body {
-    background: #e35869;
+    /* background: #e35869; */
+    background-image: url("./img//maxresdefault.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 -50px;
 }
 button {
     background: #2d3b55;
