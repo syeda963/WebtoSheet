@@ -111,9 +111,11 @@
                     }
 					for (let i = 0; i < result.length; i++) {
 						const element = result[i];
+						let date = new Date(element.date)
+						let dateFormatted = date.toLocaleString()
 						var html = `<tr>
 		                          <td>${i + 1}</td>
-		                          <td>${element.date}</td>
+		                          <td>${dateFormatted}</td>
 		                          <td>${element.station}</td>
 		                          <td>${element.staffname}</td>
 		                          <td>${element.timeofdisconnection}</td>
