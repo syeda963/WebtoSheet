@@ -182,3 +182,6 @@ form {
 .form-container .cancel {
     background-color: red;
 }
+tr td {
+    white-space: nowrap;
+}
