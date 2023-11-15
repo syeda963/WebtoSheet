@@ -1,187 +1,262 @@
 html {
-    font-family: Söhne,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Arial,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
-    font-size: 13px;
+  font-family: Söhne, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 13px;
 }
 body {
-    /* background: #e35869; */
-    background: url(./img//maxresdefault.jpg) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+  /* background: #e35869; */
+  background: url(./img//maxresdefault.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 button {
-    background: #2d3b55;
-    color: #fff;
-    padding: 10px;
-    font-size: 14px;
-    font-weight: 500;
+  background: #2d3b55;
+  color: #fff;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
 }
 .table_wrap {
-    border: 1px solid;
-    border-collapse: collapse;
-
+  border: 1px solid;
+  border-collapse: collapse;
 }
-tr th,tr td {
-    border: 1px solid;
-    padding: 5px 10px;
-    border-collapse: collapse;
+tr th,
+tr td {
+  border: 1px solid;
+  padding: 5px 10px;
+  border-collapse: collapse;
 }
-.no-data{
-    text-align: center;
+.no-data {
+  text-align: center;
 }
 .main_container_addDisconnection {
-    min-width: 600px;
+  min-width: 600px;
 }
 .main_container_addDisconnection label {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 .main_container_addDisconnection .input_wrap label {
-    width: 180px;
+  width: 180px;
 }
 
 .main_container {
-    display: none;
-    background-color: #fff;
-    border-radius: 4px;
-    box-shadow: 0 2px 25px rgba(0,0,0,.2);
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    min-width: 500px;
+  display: none;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 25px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 500px;
 }
 .input_wrap {
-    padding-bottom: 5px;
+  padding-bottom: 5px;
 }
 @media screen and (max-width: 600px) {
-    .main_container {
-        min-width: 360px;
-    }
-    .table_wrap {
-        display: block;
-        width: 350px;
-        overflow: scroll;
-    }
+  .main_container {
+    min-width: 360px;
+  }
+  .table_wrap {
+    display: block;
+    width: 350px;
+    overflow: scroll;
+  }
 }
 .input_container {
-    max-width: 100%;
-    display: flex;
-    justify-content: center;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
+.custom_main_container {
+  overflow: overlay;
+  overflow-y: scroll;
+  max-height: 500px;
+}
+.custom_input_container {
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
 }
 .dropdown_container {
-    height: 300px;
-    margin: 0 auto;
+  height: 300px;
+  margin: 0 auto;
 }
 .dropdown_container button {
-    height: 30px;
-    padding: 5px 20px !important;
+  height: 30px;
+  padding: 5px 20px !important;
 }
 #selectDrop {
-    width: 150px;
+  width: 150px;
 }
 #selectSection,
 #selectStation {
-    width: 175px;
-    max-height: 24px;
-    padding: 0;
+  width: 175px;
+  max-height: 24px;
+  padding: 0;
 }
 input,
 textarea {
-    max-height: 24px;
-    width: 173px;
-    padding: 0;
+  max-height: 24px;
+  width: 173px;
+  padding: 0;
 }
 textarea {
 }
 .input_wrap {
-    display: flex;
-    height: 30px;
+  display: flex;
+  height: 30px;
 }
 .input_wrap label {
-    width: 120px;
+  width: 120px;
 }
 .input_wrap input {
-    height: 24px !important;
-    border: 1px solid #000;
+  height: 24px !important;
+  border: 1px solid #000;
 }
 .input_wrap select {
-    height: 26px !important;
-    border: 1px solid #000;
-    max-height: 26px !important;
+  height: 26px !important;
+  border: 1px solid #000;
+  max-height: 26px !important;
+}
+.custom_input_wrap {
+  display: flex;
+  height: 30px;
+}
+.custom_input_wrap label {
+  width: 180px;
+}
+.custom_input_wrap input {
+  height: 24px !important;
+  border: 1px solid #000;
+}
+.custom_input_wrap select {
+  height: 26px !important;
+  border: 1px solid #000;
+  max-height: 26px !important;
 }
 .submit_btn a {
-    margin-top: 50px;
-    width: 180px;
-    height: 50px;
-    border: 1px solid #777;
-    background: #fff;
-    color: #000;
-    /* padding: 10px 30px; */
+  margin-top: 50px;
+  width: 180px;
+  height: 50px;
+  border: 1px solid #777;
+  background: #fff;
+  color: #000;
+  /* padding: 10px 30px; */
 }
 form button {
-    display: flex;
-    margin: 24px auto;
+  display: flex;
+  margin: 24px auto;
 }
 form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
 }
 
 /* form popup */
 /* The popup form - hidden by default */
 .form-popup {
-    display: block;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    border: 3px solid #f1f1f1;
-    z-index: 9;
-    transform: translate(-50%, -50%);
-    background: #232323;
-    -webkit-box-shadow: 0px 0px 0px 9999px #e35869;
-    box-shadow: 0px 0px 0px 9999px #e35869;
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+  transform: translate(-50%, -50%);
+  background: #232323;
+  -webkit-box-shadow: 0px 0px 0px 9999px #e35869;
+  box-shadow: 0px 0px 0px 9999px #e35869;
 }
 /* Add styles to the form container */
 .form-container {
-    min-width: 300px;
-    max-width: 600px;
-    padding: 10px;
-    background-color: white;
+  min-width: 300px;
+  max-width: 600px;
+  padding: 10px;
+  background-color: white;
 }
-  
+
 /* Full-width input fields */
-.form-container input[type=text], .form-container input[type=password] {
-    padding: 15px;
-    border: none;
-    background: #f1f1f1;
+.form-container input[type="text"],
+.form-container input[type="password"] {
+  padding: 15px;
+  border: none;
+  background: #f1f1f1;
 }
 
 /* When the inputs get focus, do something */
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
-    background-color: #ddd;
-    outline: none;
+.form-container input[type="text"]:focus,
+.form-container input[type="password"]:focus {
+  background-color: #ddd;
+  outline: none;
 }
 
 /* Set a style for the submit/login button */
 .form-container .btn {
-    background-color: #04AA6D;
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    margin-bottom:10px;
-    opacity: 0.8;
+  background-color: #04aa6d;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  opacity: 0.8;
 }
 .form-container .cancel {
-    background-color: red;
+  background-color: red;
 }
 tr td {
-    white-space: nowrap;
+  white-space: nowrap;
+}
+
+/* loader */
+.page_loader {
+  display: none;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(12.5px);
+  -webkit-backdrop-filter: blur(12.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.page_loader_ring {
+  border: 20px solid rgb(211, 211, 211);
+  position: absolute;
+  left: 45%;
+  border-radius: 50%;
+  border-top: 20px solid #eb4335; /* red */
+  border-bottom: 20px solid #4285f4; /* blue */
+  border-right: 20px solid #fbbc05; /* yellow */
+  border-left: 20px solid #34a853; /* green */
+  width: 120px;
+  height: 120px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
