@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <script src="./allStationContactPerson.js" type="text/javascript"></script>
     <title>Project</title>
 </head>
 
@@ -25,7 +26,7 @@
                         <option value="Kabakaputtur">Kabakaputtur</option>
                         <option value="Arsikere">Arsikere</option>
                         <option value="Birur">Birur</option>
-                        <option value="Shivamogga">Shivamogga</option>
+                        <option value="Shimoga">Shimoga</option>
                         <option value="Chikjajur">Chikjajur</option>
                         <option value="Chitradurga">Chitradurga</option>
                         <option value="Harihar">Harihar</option>
@@ -35,22 +36,6 @@
                     <div class="custom_input_container" id="createElements">
                     </div>
                 </div>
-                <!-- <div class="input_wrap">
-                    <label for="staffName">Staff Name:</label>
-                    <input type="text" id="staffName" name="staffname" required><br><br>
-                </div>
-                <div class="input_wrap">
-                    <label for="CUG">CUG:</label>
-                    <input type="text" id="CUG" name="cug"><br><br>
-                </div>
-                <div class="input_wrap">
-                    <label for="Other">Other:</label>
-                    <input type="text" id="Other" name="other"><br><br>
-                </div>
-                <div class="input_wrap">
-                    <label for="movement">Movement:</label>
-                    <input type="text" id="movement" name="movement" required><br><br>
-                </div> -->
 
                 <div style="display: flex;">
                     <button type="submit">Submit & Reset</button>
@@ -63,247 +48,127 @@
                 href="https://docs.google.com/spreadsheets/d/1dzMGhQiRsSYE58CsoRV0X8FH8w6SX9llFYPFZw0ngL4/edit?pli=1#gid=63281749"
                 target="_black" style="color: #fff">View Sheet</a></button>
     </div>
+
+    <div class="page_loader" id="pageLoader">
+        <div class="page_loader_ring"> </div>
+    </div>
 </body>
 
 <script>
     let form = document.getElementById("form");
     let selectedSection = "";
-    let Mysore = [
-        {
-            name: "R. DEEPAK SSE / II / MYS",
-            phoneNumber: 9731667830
-        },
-        {
-            name: "V. Girish SSE / II / MYS",
-            phoneNumber: 7625067493
-        },
-        {
-            name: "H.K.MADHU SSE / III / MYS",
-            phoneNumber: 7625067588
-        },
-        {
-            name: "YOGESH ESM / CAB",
-            phoneNumber: 7676218269
-        },
-        {
-            name: "RAMKUMAR ESM / MYS",
-            phoneNumber: 7676218273
-        },
-        {
-            name: "Sai Kumar ESM / MYS",
-            phoneNumber: 7676218266
-        },
-        {
-            name: "LOHITHA ESM / MYS",
-            phoneNumber: 9741587286
-        },
-        {
-            name: "Dharamdev MCM / MYS",
-            phoneNumber: 7676218315
-        },
-        {
-            name: "DEVARAJ MCM / MYS",
-            phoneNumber: 7625067580
-        },
-        {
-            name: "SABIN MCM / MYS",
-            phoneNumber: 7676218259
-        },
-        {
-            name: "Harapriya ESM / MYS",
-            phoneNumber: 7676218279
-        },
-        {
-            name: "Pandiyan ESM / MYS",
-            phoneNumber: 7676218268
-        },
-        {
-            name: "Pushpa ESM / MBBC",
-            phoneNumber: 7676218282
-        },
-        {
-            name: "Nithin Kumar ESM / NHY",
-            phoneNumber: 7676218257
-        },
-        {
-            name: "Arun Kumar ESM / NHY",
-            phoneNumber: 7676218260
-        },
-        {
-            name: "NIKHIL ESM / PANP",
-            phoneNumber: 8157936440
-        },
-        {
-            name: "PUNITH ESM / PANP",
-            phoneNumber: 7625067585
-        },
-        {
-            name: "RASMITH ESM / MNGT",
-            phoneNumber: 7676218263
-        },
-        {
-            name: "Arun J Raj ESM / AP",
-            phoneNumber: 7676218275
-        },
-        {
-            name: "Arjun  ESM / AP",
-            phoneNumber: 7483086754
-        },
-        {
-            name: "Manoj Kumar ESM / KDO",
-            phoneNumber: 7676218314
-        },
-        {
-            name: "Suresh ESM / NTW",
-            phoneNumber: 7676218249
-        },
-        {
-            name: "Vinod ESM / NTW",
-            phoneNumber: 7625067589
-        },
-        {
-            name: "RAJENDRAN ESM / CMNR",
-            phoneNumber: 7676218274
-        },
-    ]
 
-    let Holenarsipur = [
-        {
-            name: "Dineshram SSE / HLN", phoneNumber: 9731667821
-        },
-        {
-            name: "V. Chandru SSE / KRNR", phoneNumber: 7625067487
-        },
-        {
-            name: "Valrajan ESM / MNGT", phoneNumber: 9798345552
-        },
-        {
-            name: "Suhas ESM / BLGA", phoneNumber: 6360391840
-        },
-        {
-            name: "CHETHAN ESM / KRNR", phoneNumber: 7676218277
-        },
-        {
-            name: "SRINIVAS ESM / KRNR", phoneNumber: 7676218253
-        },
-        {
-            name: "YUSUF ALI ESM / KRNR", phoneNumber: 7676218258
-        },
-        {
-            name: "Ravinder ESM / AKK", phoneNumber: 7676218265
-        },
-        {
-            name: "SOMASHEKAR ESM / AKK", phoneNumber: 7676218284
-        },
-        {
-            name: "A.T. NAGRAJ MCM / HLN", phoneNumber: 7625067500
-        },
-        {
-            name: "Ashok  Gupta ESM / HLN", phoneNumber: 7676218256
-        },
-        {
-            name: "Sharuk ESM//HLN", phoneNumber: 6360392173
-        },
-        {
-            name: "Pappu ESM / HAS", phoneNumber: 9830754473
-        },
-    ]
+    // stationList value's are from allStationContactPerson.js file
+    let stationList = [
+        { name: "Mysore", value: Mysore },
+        { name: "Holenarsipur", value: Holenarsipur },
+        { name: "Hassan", value: Hassan },
+        { name: "Kabakaputtur", value: Kabakaputtur },
+        { name: "Arsikere", value: Arsikere },
+        { name: "Birur", value: Birur },
+        { name: "Shimoga", value: Shimoga },
+        { name: "Chikjajur", value: Chikjajur },
+        { name: "Chitradurga", value: Chitradurga },
+        { name: "Harihar", value: Harihar },
+    ];
+
+    function getStationName(value) {
+        return stationList.find(item => {
+            if (item.name === value) {
+                return item.value;
+            }
+        });
+    }
 
     document.getElementById('selectSection').addEventListener('change', (e) => {
         const value = e.target.value;
-        console.log(value, 'value')
-        if (value === 'Mysore') {
-            selectedSection = Mysore
-            let createElements = document.getElementById('createElements');
-            createElements.innerHTML = ''
+        // compare the value with stationList and return the value
+        let isSection = getStationName(value)
 
-            Mysore.map((val, index) => {
-                // create input text field with name and value as name
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.name = val.name;
-                input.value = '';
-                input.id = val.phoneNumber;
-                // add label for input as name
-                const label = document.createElement('label');
-                label.textContent = val.name;
+        selectedSection = isSection.value
 
-                // create a div tag and class name custom_input_wrap
-                const div = document.createElement('div');
-                div.className = 'elemets' + index + ' ' + 'custom_input_wrap';
+        let createElements = document.getElementById('createElements');
+        createElements.innerHTML = ''
 
-                // attach input and label to form id createElements
-                div.appendChild(label);
-                div.appendChild(input);
+        isSection.value.map((val, index) => {
+            // create input text field with name and value as name
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = val.name;
+            input.value = '';
+            input.id = val.phoneNumber;
 
-                createElements.appendChild(div);
-            })
-        } else if (value === 'Holenarsipur') {
-            selectedSection = Holenarsipur
-            let createElements = document.getElementById('createElements');
-            createElements.innerHTML = ''
+            // add label for input as name
+            const label = document.createElement('label');
+            label.textContent = val.name;
 
-            Holenarsipur.map((val, index) => {
-                // create input text field with name and value as name
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.name = val.name;
-                input.value = '';
-                input.id = val.phoneNumber;
-                // add label for input as name
-                const label = document.createElement('label');
-                label.textContent = val.name;
+            // create a div tag and class name custom_input_wrap
+            const div = document.createElement('div');
+            div.className = 'elemets' + index + ' ' + 'custom_input_wrap';
 
-                // create a div tag and class name custom_input_wrap
-                const div = document.createElement('div');
-                div.className = 'elemets' + index + ' ' + 'custom_input_wrap';
+            // attach input and label to form id createElements
+            div.appendChild(label);
+            div.appendChild(input);
 
-                // attach input and label to form id createElements
-                div.appendChild(label);
-                div.appendChild(input);
-
-                createElements.appendChild(div);
-            })
-        }
+            createElements.appendChild(div);
+        })
     });
-
-
+    
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-
+        
         const result = selectedSection.map(item => ({
             staffname: item.name,
             cug: item.phoneNumber,
             movement: document.getElementById(item.phoneNumber).value,
         }));
         console.log(result);
-
+        
         let obj = {
             staffDetail: result, // result is an array
             section: form.section.value // value is a string
         }
-
+        
         const jsonString = JSON.stringify(obj);
-
+        
         if (form.section.value !== '') {
-            fetch('https://script.google.com/macros/s/AKfycbxESvmL-UvSETK7zHpVRfU2lPcyBq-vbmyVfpKaQT8eCntWJiq4WLwO2T59t8e8iATB1w/exec',
+            document.getElementById("pageLoader").style.display = "flex"
+            fetch(
+                'https://script.google.com/macros/s/AKfycbxESvmL-UvSETK7zHpVRfU2lPcyBq-vbmyVfpKaQT8eCntWJiq4WLwO2T59t8e8iATB1w/exec',
                 {
                     method: 'POST',
-                    mode: 'no-cors',
+                    redirect: 'follow',
                     body: jsonString,
-                })
-                .then(res => {
-                    if (res.status == 302 || res.status == 200) {
-                        alert('User Added Successfully')
+                },
+                )
+                .then((res) => {
+                    if (!res.ok) {
+                        return res.text().then((text) => {
+                            throw new Error(text);
+                        });
+                    } else {
+                        return res.json();
                     }
                 })
-                .catch(err => alert(err))
-            // this.form.reset();
-            // let createElements = document.getElementById('createElements');
-            // createElements.innerHTML = ''
+                .then((r) => {
+                    document.getElementById("pageLoader").style.display = "none"
+                    
+                    // if successful, return the result as SUCCESS !
+                    alert(r.message)
+                    
+                    this.form.reset();
+                    let createElements = document.getElementById('createElements');
+                    createElements.innerHTML = ''
+                })
+                .catch((err) => {
+                    document.getElementById("pageLoader").style.display = "none"
+                    console.log('caught it err !', err);
+                });
+
         } else {
             alert('please provide section')
         }
+
     });
 
     // document.getElementById("goNext").onclick = function () {
