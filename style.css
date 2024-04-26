@@ -93,12 +93,14 @@ input,
 textarea {
     max-height: 24px;
     width: 173px;
-    padding: 0;
+    padding: 2px;
 }
 textarea {
 }
 .input_wrap {
     display: flex;
+    justify-content: center;
+    align-items: center;
     height: 30px;
 }
 .input_wrap label {
@@ -124,7 +126,7 @@ textarea {
 }
 form button {
     display: flex;
-    margin: 24px auto;
+    margin: 18px auto;
 }
 form {
     display: flex;
@@ -184,4 +186,25 @@ form {
 }
 tr td {
     white-space: nowrap;
+}
+.custom_main_container {
+    max-height: 340px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.custom_input_container {
+    display: flex;
+    flex-direction: column;
+}
+.custom_input_wrap {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin: 6px 4px;
+}
+.custom_input_wrap input {
+    border: 1px solid;
+}
+.input_wrap textarea {
+    border: 1px solid;
 }
