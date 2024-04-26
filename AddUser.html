@@ -72,6 +72,7 @@
         { name: "Harihar", value: Harihar },
     ];
 
+    // value contains selected station name then it matches with stationList and return the list of stations value from allStationContactPerson.js file
     function getStationName(value) {
         return stationList.find(item => {
             if (item.name === value) {
