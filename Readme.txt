@@ -19,8 +19,8 @@ all station person data are stored in this page,
 
 
 / *** style page details
-all the styleing code are here
+all the styleing code are here.
 
 
 / *** page2 page details
-this was a login page later removed, now not using
+this was a login page later removed, now not using.
